@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@theme {
+  --font-titles: "Montserrat", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --color-body: #EAEAEA;
+  --color-primary: #0072CE;
+  --color-secondary: #CCFF00;
+  --color-text: #333333;
+  --color-footer: #222932
+}
+
+h1 {
+  font-family: var(--font-titles);
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+h2 {
+  font-family: var(--font-titles);
+  font-weight: bolder;
+  color: var(--color-text);
+}
+
+p,
+span,
+a,
+li,
+button,
+input,
+textarea {
+  font-family: var(--font-body);
+  font-weight: normal;
+}
+
+body {
+  /* background-image: url('/fondo-padelistas.png');
+
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: scroll;
+  background-size: 100% 80%; */
+
+  background-color: var(--color-body);
+}
+
