@@ -7,6 +7,7 @@ use App\Http\Controllers\EquipoJugadorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\PeticionesController;
+use App\Http\Controllers\PartidosController;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -34,8 +35,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 //ruta para mandar mensajes por formulario
 Route::post('/mensaje', [MensajeController::class, 'store']); 
+//ruta para recuperar los mensajes que han llegado en el panel administrador
+Route::get('/getMensajes', [MensajeController::class, 'getMensajes']); 
 //ruta para obtener los equipos sin fecha de cese 
-Route::get('/equipos', [EquipoJugadorController::class, 'getEquipos']);
+Route::get('/equipos/{equipo_id}', [EquipoJugadorController::class, 'getEquipos']);
 
 //ruta para comprobar la disponibilidad  de una pista 
 Route::post('/comprobarPista', [PistaController::class, 'compruebaDisponibilidad']);
@@ -44,3 +47,32 @@ Route::post('/reservarPista', [PistaController::class, 'reservarPista']);
 
 //ruta para realizar una peticion de cese 
 Route::post('/peticionCese', [PeticionesController::class, 'peticionesCese']);
+//Ruta para recoger las peticiones de cese 
+Route::get('/getPeticiones', [PeticionesController::class, 'getPeticiones']);
+//Ruta para aceptar la petición de cese
+Route::put('/aceptaPeticion/{equipo_id}/{peticion_id}', [EquipoJugadorController::class, 'aceptaPeticion']);
+//Ruta para rechazar la petición de cese
+Route::put('/rechazaPeticion/{peticion_id}', [EquipoJugadorController::class, 'rechazaPeticion']);
+
+//Ruta para ver las reservas sin finalizar anteriores al día de hoy
+Route::get('/getReservasNoFinalizadas', [PartidosController::class, 'getReservasNoFinalizadas']);
+//Ruta para recoger los árbitros
+Route::get('/getArbitros', [EquipoJugadorController::class, 'getArbitros']);
+
+//Ruta para inscribir los partidos terminados en la tabla partidos
+Route::post('/registraPartido', [PartidosController::class, 'registraPartido']);
+
+//peticion get para recuperar los partidos del equipo x
+Route::get('/getPartidosEquipo/{equipo_id}', [PartidosController::class, 'getPartidosEquipo']);
+
+//Peticion get para sacar las estadísticas de un equipo
+Route::get('/getPartidosEquipoStats/{equipo_id}', [PartidosController::class, 'getPartidosEquipoStats']);
+
+//peticion get para recuperar los partidos del equipo x con PAGINACION
+Route::get('/partidosEquipo/{equipo_id}', [PartidosController::class, 'partidosEquipo']);
+
+//peticion para recuperar las pistas utilizadas por x equipo
+Route::get('/getPistasUtilizadas/{equipo_id}', [EquipoJugadorController::class, 'getPistasUtilizadas']);
+
+//peticion get para recuperar la clasificación general
+Route::get('/clasificacionGeneral/', [PartidosController::class, 'clasificacionGeneral']);

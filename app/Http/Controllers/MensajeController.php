@@ -26,4 +26,13 @@ class MensajeController extends Controller
             'data' => $mensaje
         ], 201); 
     }
+    
+    public function getMensajes(){
+        $mensajes = Mensaje::all(); 
+        
+        return response()->json([
+            "mensaje"=> "Mensajes de consumidores recuperados con éxito", 
+            "mensajes"=>$mensajes
+        ], 200);
+    }
 }

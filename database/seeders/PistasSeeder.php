@@ -20,7 +20,7 @@ class PistasSeeder extends Seeder {
         $respuesta = Http::get('https://datosabiertos.regiondemurcia.es/api/'
                 . 'action/datastore_search?resource_id=61506eed-7f6b-41eb-9267-d696ef497a47&limit=89');
         
-        //Si obtenemos respuesta, empezamos a realizar la alforitmia
+        //Si obtenemos respuesta, empezamos a realizar la algoritmia
         if ($respuesta->successful()){
             //Convertimos los datos a json
             $datos = $respuesta->json();
